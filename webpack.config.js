@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
 
   // webpack will take the files from ./src/index
@@ -31,7 +30,7 @@ module.exports = {
 
       // css-loader to bundle all the css files into one file and style-loader to add all the styles  inside the style tag of the document
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         use: ['style-loader', 'css-loader']
       },
       // url-loader for images
@@ -44,13 +43,13 @@ module.exports = {
       }
     ]
   },
+  devServer: {
+    historyApiFallback: true,
+    hot: true
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new CopyWebpackPlugin({
-        patterns: [
-        {from:'src/assets/img',to:'images'}, 
-    ]})
 ]
 };
